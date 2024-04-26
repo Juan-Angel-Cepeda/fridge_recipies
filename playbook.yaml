@@ -1,0 +1,61 @@
+- hosts: [ollamaServer,yoloServer]
+  become: yes
+  tasks:
+    - name: Install curl
+      apt:
+        name: curl
+        state: present
+
+    - name: Install docker
+      shell: curl -fsSL https://get.docker.com -o get-docker.sh && sudo sh get-docker.sh
+
+    - name: Start Docker
+      service:
+        name: docker
+        state: started
+      ignore_errors: yes
+
+    - name: Instalar Git
+      apt:
+        name: git
+        state: present
+
+    - name: Crear carpeta de docker file
+      file:
+        path: /home/ubuntu/fridgeProject
+        state: directory
+      ignore_errors: yes
+
+    - name: Clonar el repositorio del proyecto
+      git:
+        repo: https://github.com/Juan-Angel-Cepeda/fridge.git
+        dest: /home/ubuntu/fridgeProject
+        update: yes
+        clone: yes
+
+- hosts: ollamaServer
+  become: yes
+  tasks:
+    - name: Eliminar carpeta de servidor Backend
+      file:
+        path: /home/ubuntu/fridgeProject/fridge-recipies/server_backend
+        state: absent
+
+    - name: Eliminar carpeta de servidor Yolo
+      file:
+        path: /home/ubuntu/fridgeProject/fridge-recipies/yolo
+        state: absent
+
+    - name: Ejecutar el compose para crear el contenedor de ollama
+      command: docker compose -f docker-compose.ollama.yml up -d
+      args:
+        chdir: /home/ubuntu/fridgeProject/ollama
+
+    - name: Ejecutar el modelo
+      command: docker exec -ti ollama ollama run llama2
+
+- hosts: yoloServer
+  become: yes
+  tasks:
+  
+    

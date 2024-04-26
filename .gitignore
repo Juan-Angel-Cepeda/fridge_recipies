@@ -1,0 +1,74 @@
+hosts.txt
+
+server_backend/package-lock.json
+
+# compiled output
+server_backend/dist
+server_backend/node_modules
+server_backend/build
+
+# Logs
+server_backend/logs
+server_backend/*.log
+server_backend/npm-debug.log*
+server_backend/pnpm-debug.log*
+server_backend/yarn-debug.log*
+server_backend/yarn-error.log*
+server_backend/lerna-debug.log*
+
+# OS
+.DS_Store
+
+# Tests
+/coverage
+/.nyc_output
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+server_backend/.vscode/*
+server_backend/!.vscode/settings.json
+server_backend/!.vscode/tasks.json
+server_backend/!.vscode/launch.json
+server_backend/!.vscode/extensions.json
+
+# dotenv environment variable files
+server_backend/.env
+server_backend/.env.development.local
+server_backend/.env.test.local
+server_backend/.env.production.local
+server_backend/.env.local
+
+# temp directory
+server_backend/.temp
+server_backend/.tmp
+
+# Runtime data
+server_backend/pids
+server_backend/*.pid.lock
+server_backend/*.pid
+server_backend/*.seed
+
+# Diagnostic reports (https://nodejs.org/api/report.html)
+server_backend/report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+# Data Bind
+server_backend/postgres
+
+#file system
+server_backend/static/*
+
+
+yolo/yolo_env/Include/*
+yolo/yolo_env/Lib/*
+yolo/yolo_env/Scripts/*
+yolo/yolo_env/pyvenv.cfg
+yolo/yolo_env/share/*
+yolo/yolo_env/src/__pycache__/*

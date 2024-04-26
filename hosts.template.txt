@@ -1,0 +1,12 @@
+# Este es un ejemplo de como hacer el archivo de hosts de configuración
+# Este archivo lo ejecuta Ansible para controlar los servidores
+# con los comandos del archivo playbook.yaml
+# remota de archivos para la nube
+# debe de contener el nombre del servidor, la ip privada del EC2 o VM
+
+[ollamaServer]
+'ip_servidor' anisble_user='usuario_servidor' ansible_ssh_private_key_file='home/user/ssh_private_key.pem'
+[yoloServer]
+'ip_servidor' anisble_user='usuario_servidor' ansible_ssh_private_key_file='home/user/ssh_private_key.pem'
+[backendServer]
+'ip_servidor' anisble_user='usuario_servidor' ansible_ssh_private_key_file='home/user/ssh_private_key.pem'
