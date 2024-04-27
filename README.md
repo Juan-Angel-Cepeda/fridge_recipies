@@ -7,15 +7,18 @@ El proyecto esta divido en tres partes:
 - 2. El modelo de visión por computadora
 - 3. El servidor de Back end.
 
-Una aplicación movil manda una fotografia de lo que contiene el refrigerador, esta fotografía llega a un endpoint del backend
+Una aplicación movil manda una fotografia de lo que contiene el refrigerador, esta fotografía llega a un endpoint en el backend.
+
+Mandar un jpg a:
 ```
-http://fridgerecipies/api/vi/foto
+http://fridgerecipies/api/v1/yolo
 ```
-El backend manda la foto al servidor del modelo de visión por computadora. El modelo de visión por computadora responde con una list de ingredientes al back.
+El backend manda la foto al servidor del modelo de visión por computadora. El modelo de visión por computadora responde con una lista de ingredientes al back.
 
 El backend recibe la lista de ingredientes y formatea un prompt para el modelo de lenguaje. Manda los ingredientes al modelo de lenguaje y este contesta con una receta.
 
 El backend manda la receta a la aplicación movil.
+
 ### Proyecto en cloud
 
 Este proyecto está pensado para ejecutarse en un entorno cloud con la siguiente arquitectura:
@@ -24,24 +27,28 @@ Este proyecto está pensado para ejecutarse en un entorno cloud con la siguiente
 
 2. Al momento de hacer la configuraicón pasar la llave para SSH al EC2 de ansible.
 
-3. Pasar el `playbook.yaml` a Ansible y configurar el archivo `hosts.template` con las ips privadas de la red de EC2´s, los usuarios y con la llave de acceso de SSH para el acceso de anible.
-
+3. Pasar el `playbook.yaml` a Ansible y configurar el archivo `hosts.template` con las ips privadas de la red de EC2´s, los usuarios y con la llave de acceso de SSH para el acceso de ansible.
 
 ### Probar el proyecto en local.
 
 1. Ingresa a ` ./ollama `
+
 2. Ejecuta el comando ``` docker compose -f docker.ollama.compose up -d ```. Esto descargará la imagen de docker de ollama y ejecutara el contenedor del modelo.
+
 3. Abre una terminal y ejecuta el comando ``` docker exec -it ollama ollama run llama2 ```
-Esto ejecuta el modelo de lenguaje llama2, es necesario contar con minimo 8Gb de RAM disponibles para el modelo
-4. Ingresa a ``` ./server_backend ``` y ejecuta ``` npm run start:dev ``` esto levantará el backend
-5. Abre postman o Insombra y envia un **post** al end point ``` http://localhost:3000/api/v1/ollama```
+Esto ejecuta el modelo de lenguaje llama2, es necesario contar con minimo 8Gb de RAM disponibles para el modelo.
+
+4. Ingresa a ``` ./server_backend ``` y ejecuta ``` npm run start:dev ``` esto levantará el backend.
+
+5. Ingresa a `./yolo/yolo_env/src`, instala los paquetes necesarios: `pip install -r requirements.txt`, despues de instalar las dependencias levanta el servidor de `uvicorn main:app --reload`,
+
+6. Abre postman o Insombra y envia un **post** al end point ``` http://localhost:3000/api/v1/ollama```
 **Body:**
 ```
 {
-    prompt:"Hola Ollama"
+    file:'tu_imagen_pa_recetas.jpg'
 }
 ```
-El modelo contesta al prompt
-6. API para Enviar la fotografía
-Ingresa a la caprteta del modelo yolo `yolo\main.py` ejecutar el comando para levantar fast api `uvicorn main:app --reload` 
-enviar una fotografía al endpoint `localhost:8000/detect`
+7. Tu request deberá lucir de la siguiente manera:
+![Request](imgs/postman_request.png)
+7. El modelo respondera con la receta.

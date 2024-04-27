@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { PromptOllamaDto } from './dto/create-ollama.dto';
 import  axios, { AxiosInstance} from 'axios';
 
 
@@ -12,7 +11,10 @@ export class OllamaService {
     console.log(ingredients)
     const data = { 
       model:"llama2",
-      prompt:"Cuantas veces se repiten estas palabras:  "+ ingredients,
+      prompt:"Me puedes dar una receta básica, cuento con aceite, sal"+
+              "pimienta, condimentos básicos y los siguietes ingredientes: " + 
+              ingredients+
+              "No necesariamente hay que usar todos los ingredientes"
     }
     
     const response = await this.axios.post<any>(process.env.OLLAMA_URL,data,{
