@@ -11,10 +11,7 @@ export class OllamaService {
     console.log(ingredients)
     const data = { 
       model:"llama2",
-      prompt:"Me puedes dar una receta básica, cuento con aceite, sal"+
-              "pimienta, condimentos básicos y los siguietes ingredientes: " + 
-              ingredients+
-              "No necesariamente hay que usar todos los ingredientes"
+      prompt:"Cuantas veces se repiten las siguientes palabras: " + ingredients
     }
     
     const response = await this.axios.post<any>(process.env.OLLAMA_URL,data,{

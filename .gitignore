@@ -45,6 +45,7 @@ server_backend/.env.development.local
 server_backend/.env.test.local
 server_backend/.env.production.local
 server_backend/.env.local
+server_backend/.env.prod
 
 # temp directory
 server_backend/.temp

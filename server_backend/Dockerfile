@@ -23,13 +23,13 @@ COPY package.json package-lock.json ./
 RUN npm ci --only=production
 
 # Copy the .env file
-COPY .env ./
+COPY .env.prod ./
 
 # Copy the built app
 COPY --from=builder /app/dist ./dist
 
 # Set NODE_ENV to production
 ENV NODE_ENV=production
-
+EXPOSE 3000
 # Start the application
 CMD [ "node","dist/main" ]

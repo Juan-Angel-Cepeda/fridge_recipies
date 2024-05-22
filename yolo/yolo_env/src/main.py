@@ -5,14 +5,12 @@ import cv2
 import numpy as np
 from ultralytics import YOLO
 
-
 app = FastAPI()
-
-model = YOLO("yolov8n.pt")
+model = YOLO("fridgeYolo.pt")
 
 @app.get("/")
 async def read_root():
-    return {"Hello": "World"}
+    return {"Welcome to": "Yolo Detect"}
 
 @app.post("/detect/")
 async def detect_objects(request:Request):
@@ -25,12 +23,13 @@ async def detect_objects(request:Request):
     
     class_names = []
     for result in results:
-        boxes = result.boxes  # Boxes object for bbox outputs
-        class_indices = boxes.cls  # Class indices of the detections
-        class_names = [result.names[int(cls)] for cls in class_indices]  # Map indices to names
+        boxes = result.boxes 
+        class_indices = boxes.cls 
+        class_names = [result.names[int(cls)] for cls in class_indices] 
 
     response = {
         "ingredients-detected":class_names
     }
-    return JSONResponse(content=response)    
+    return JSONResponse(content=response)
+
     

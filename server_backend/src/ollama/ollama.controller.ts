@@ -9,7 +9,7 @@ export class OllamaController {
   ){}
 
   @Post()
-  create(@Body() ingredients : any) {
+  askRecipie(@Body() ingredients : any) {
     return this.ollamaService.ollamaAnswer(ingredients);
   }
 }

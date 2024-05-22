@@ -19,7 +19,7 @@ export class YoloController {
 
     const imageBuffer = file.buffer;
     const ingredients = await this.yoloService.askYoloIngredients(imageBuffer);
-    const ollamaResponse = await this.ollamaControler.create(ingredients);
+    const ollamaResponse = await this.ollamaControler.askRecipie(ingredients);
     return ollamaResponse;
   }
 }
